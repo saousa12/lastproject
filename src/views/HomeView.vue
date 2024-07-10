@@ -5,7 +5,8 @@
         color="white"
         hide-delimiter-background
         show-arrows="hover"
-        style="color: white; height: auto"
+        style="color: black"
+        height="800"
       >
         <v-carousel-item
           v-for="(item, i) in items"
@@ -24,12 +25,18 @@
         </div>
       </div>
       <div class="d-flex justify-center flex-row">
-        <div v-for="(product, index) in newProducts" :key="index">
+        <div
+          v-for="(product, index) in newProducts"
+          :key="index"
+          class="text-center font-weight-bold text-h6"
+        >
           <img :src="product.src" class="resized-image" />
+          <p>{{ product.name }}</p>
+          <p class="text-light-green">{{ product.price }}</p>
         </div>
       </div>
     </div>
-    <div>
+    <div class="sale">
       <v-row class="ma-5 pa-5">
         <v-col class="d-flex justify-end"
           ><img
@@ -53,9 +60,10 @@
             Big Sale -30%
           </p>
           <p class="text-h5 mt-5">
-            We specialize in creating the perfect floral expression of your
-            message. May it be love, condolences, friendship or celebration we
-            are ready to deliver your message in floral. We also deliver daily.
+            We specialize in creating the perfect small tree expression of your
+            message. Whether it is love, condolences, friendship, or
+            celebration, we are ready to deliver your message through small
+            trees. We also offer daily delivery.
           </p>
           <v-btn
             href="#"
@@ -67,6 +75,52 @@
             style="margin-top: 10%"
             >View look</v-btn
           >
+        </v-col>
+      </v-row>
+    </div>
+    <div class="sale">
+      <v-row class="ma-5 pa-5">
+        <v-col
+          class="d-flex flex-column justify-center"
+          style="margin-left: 10%"
+        >
+          <p class="text-h3 custom-font">7 Day</p>
+          <div
+            style="
+              width: 100px;
+              height: 2px;
+              background-color: gray;
+              margin-top: 3%;
+            "
+          ></div>
+          <p
+            class="text-h2 mt-3 font-weight-bold"
+            style="text-transform: uppercase"
+          >
+            IDEAL FRESHNESS
+          </p>
+
+          <p class="text-h5 mt-5">
+            We specialize in creating the perfect small tree expression of your
+            message. Whether it is love, condolences, friendship, or
+            celebration, we are ready to deliver your message through small
+            trees. We also offer daily delivery.
+          </p>
+          <v-btn
+            href="#"
+            color="green-darken-4"
+            max-width="10rem"
+            size="large"
+            rounded="xl"
+            variant="outlined"
+            style="margin-top: 10%"
+            >View look</v-btn
+          >
+        </v-col>
+        <v-col
+          ><img
+            src="https://cdn.pixabay.com/photo/2024/01/27/08/22/ai-generated-8535500_640.png"
+          />
         </v-col>
       </v-row>
     </div>
@@ -96,49 +150,95 @@
         </div>
       </div>
     </div>
-    <div>
-      <div class="d-flex flex-column bg-green-lighten-3">
-        <div style="padding: 5% 0% 5% 0%; text-align: center">
+    <div class="shop" id="shop">
+      <div style="margin: 5% 0%">
+        <div>
+          <p class="text-h3 text-center">Featured Item</p>
+        </div>
+        <div class="d-flex justify-center ma-5">
+          <v-btn
+            v-for="(btn, index) in buttons"
+            :key="index"
+            rounded="xl"
+            size="large"
+            :color="selectedButton === index ? 'green' : ''"
+            @click="setButton(index)"
+            class="ma-2"
+          >
+            {{ btn }}
+          </v-btn>
+        </div>
+        <div>
+          <v-row class="d-flex justify-center">
+            <v-col
+              v-for="(item, index) in displayedFeatures"
+              :key="index"
+              cols="12"
+              md="2"
+              class="mr-2"
+            >
+              <div class="text-center text-h6">
+                <img :src="item.img" alt="" class="resized-image" />
+                <p>⭐⭐⭐⭐⭐</p>
+                <p>{{ item.name }}</p>
+                <p class="text-red">{{ item.price }}</p>
+              </div>
+            </v-col>
+          </v-row>
+        </div>
+        <div class="d-flex flex-row justify-center" style="margin-right: 15px">
+          <v-btn rounded="xl" @click="scrollLeft" :disabled="currentIndex === 0"
+            >←</v-btn
+          >
+          <v-btn
+            rounded="xl"
+            @click="scrollRight"
+            :disabled="currentIndex === maxIndex"
+            >→</v-btn
+          >
+        </div>
+      </div>
+    </div>
+    <div class="blog" id="blog">
+      <div
+        class="bg-light-green-lighten-3"
+        style="margin: 5% 0% 0% 0%; padding: 5% 0% 5% 0%; text-align: center"
+      >
+        <div>
           <p class="text-h3">From Our Blog</p>
           <p class="text-h5">
             A perfect blend of creativity, energy, communication, happiness and
             love. Let us arrange a smile for you.
           </p>
         </div>
-        <div>
-          <v-row>
-            <v-col
-              v-for="(blog, index) in Blogs"
-              :key="index"
-              cols="12"
-              md="4"
-              class="mb-4"
-            >
-              <v-card>
-                <img
+        <div class="d-flex flex-row justify-center mt-5">
+          <div v-for="(blog, index) in Blogs" :key="index">
+            <v-card class="ma-2 pa-2 text-start" width="500" height="550">
+              <div>
+                <v-img
                   :src="blog.img"
                   alt=""
-                  style="max-height: 20rem"
-                  class="custom-imge"
-                />
+                  max-height="20rem"
+                  class="custom-image"
+                ></v-img>
                 <v-card-title>{{ blog.title }}</v-card-title>
-                <v-card-subtitle
-                  >{{ blog.writer }}/{{ blog.date }}</v-card-subtitle
-                >
+                <v-card-subtitle>
+                  {{ blog.writer }} / {{ blog.date }}
+                </v-card-subtitle>
                 <v-card-text>{{ blog.content }}</v-card-text>
-                <v-divider style="margin: 0 3% 0 3%"></v-divider>
-                <div style="padding: 2%" class="d-flex justify-space-between">
+              </div>
+              <div>
+                <v-divider class="mx-3" />
+                <div class="d-flex justify-space-between px-4 py-2">
                   <a href="#">Continue Reading</a>
                   <div class="d-flex flex-row">
-                    <v-icon id="like">{{
-                      active ? "mdi-heart" : "mdi-heart-outline"
-                    }}</v-icon>
-                    <p>1</p>
+                    <v-icon icon="mdi-heart-outline" />
+                    <p class="ml-2">0</p>
                   </div>
                 </div>
-              </v-card>
-            </v-col>
-          </v-row>
+              </div>
+            </v-card>
+          </div>
         </div>
       </div>
     </div>
@@ -147,81 +247,149 @@
 
 <script>
 export default {
+  name: "Home",
   data() {
     return {
-      active: false,
+      isActive: false,
+      selectedButton: 0,
+      focus: false,
+      buttons: ["Special Product", "Feature", "Bestseller"],
       newProducts: [
         {
+          name: "Ornamental Sweet Potato",
           src: "https://prestashop5.templatetrip.com/PRSTM01/PRSTM003_plant/163-home_default/the-adventure-begins-framed-poster.jpg",
+          price: "$12.90",
         },
         {
-          src: "https://prestashop5.templatetrip.com/PRSTM01/PRSTM003_plant/157-home_default/the-best-is-yet-to-come-framed-poster.jpg",
+          name: "Variegated Solomon Seal",
+          src: "https://prestashop5.templatetrip.com/PRSTM01/PRSTM003_plant/203-home_default/brown-bear-cushion.jpg",
+          price: "$68.90",
         },
         {
+          name: "Dense Blazing Star",
           src: "https://prestashop5.templatetrip.com/PRSTM01/PRSTM003_plant/239-home_default/mountain-fox-notebook.jpg",
+          price: "$12.90",
         },
       ],
       items: [
         {
-          src: "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg",
+          src: "https://cdn.pixabay.com/photo/2024/04/21/01/27/ai-generated-8709663_640.png",
         },
         {
-          src: "https://cdn.vuetifyjs.com/images/carousel/sky.jpg",
+          src: "https://cdn.pixabay.com/photo/2019/11/18/08/21/bonsai-4634225_640.jpg",
         },
         {
-          src: "https://cdn.vuetifyjs.com/images/carousel/bird.jpg",
+          src: "https://cdn.pixabay.com/photo/2015/04/10/17/03/pots-716579_640.jpg",
         },
         {
-          src: "https://cdn.vuetifyjs.com/images/carousel/planet.jpg",
+          src: "https://cdn.pixabay.com/photo/2017/01/30/10/03/book-2020460_640.jpg",
         },
       ],
       Blogs: [
         {
-          img: "https://cdn.pixabay.com/photo/2021/12/06/18/48/botanical-6851296_640.jpg",
-          title: "การเลือกต้นไม้กระถางที่เหมาะสมสำหรับบ้านคุณ",
-          writer: "สมชาย พืชพันธุ์",
+          img: "https://cdn.pixabay.com/photo/2017/03/16/13/49/desk-2149265_640.jpg",
+          title: "Indoor Plant Care Tips",
+          writer: "Jane Doe",
           content:
-            "ต้นไม้กระถางไม่เพียงแต่เพิ่มความสดชื่นให้กับบ้านของคุณ แต่ยังช่วยปรับปรุงอากาศภายในบ้านได้อีกด้วย...",
-          date: "2024-07-01",
+            "Learn how to take care of your indoor plants with these simple tips.",
+          date: "2024-06-12",
         },
         {
-          img: "https://cdn.pixabay.com/photo/2021/12/06/18/48/botanical-6851296_640.jpg",
-          title: "วิธีการดูแลต้นไม้กระถางในหน้าร้อน",
-          writer: "สมหญิง ธรรมชาติ",
+          img: "https://cdn.pixabay.com/photo/2017/03/16/13/49/desk-2149265_640.jpg",
+          title: "Best Tools for Gardening",
+          writer: "John Smith",
           content:
-            "หน้าร้อนเป็นช่วงเวลาที่ท้าทายสำหรับการดูแลต้นไม้กระถาง แต่ด้วยเทคนิคที่ถูกต้อง คุณสามารถทำให้ต้นไม้ของคุณเจริญเติบโตได้ดี...",
-          date: "2024-07-05",
+            "Discover the best tools for making your gardening easier and more enjoyable.",
+          date: "2024-05-08",
         },
         {
-          img: "https://cdn.pixabay.com/photo/2021/12/06/18/48/botanical-6851296_640.jpg",
-          title: "อุปกรณ์ปลูกต้นไม้ที่จำเป็นสำหรับมือใหม่",
-          writer: "สมปอง พรรณพืช",
+          img: "https://cdn.pixabay.com/photo/2017/03/16/13/49/desk-2149265_640.jpg",
+          title: "How to Repot Your Plants",
+          writer: "Anna Johnson",
           content:
-            "การปลูกต้นไม้ไม่ยากอย่างที่คิด หากคุณมีอุปกรณ์ที่ถูกต้องและรู้จักวิธีการใช้...",
-          date: "2024-07-10",
-        },
-        {
-          img: "https://cdn.pixabay.com/photo/2021/12/06/18/48/botanical-6851296_640.jpg",
-          title: "ไอเดียการจัดสวนด้วยต้นไม้กระถาง",
-          writer: "สมพร สีเขียว",
-          content:
-            "การจัดสวนด้วยต้นไม้กระถางไม่เพียงแต่เป็นการเพิ่มความสวยงามให้กับบ้านของคุณ แต่ยังช่วยสร้างพื้นที่สำหรับการพักผ่อน...",
-          date: "2024-07-15",
-        },
-        {
-          img: "https://cdn.pixabay.com/photo/2021/12/06/18/48/botanical-6851296_640.jpg",
-          title: "เคล็ดลับการเลือกดินปลูกที่เหมาะสม",
-          writer: "สมศักดิ์ สวนสนุก",
-          content:
-            "การเลือกดินปลูกที่เหมาะสมเป็นสิ่งสำคัญในการปลูกต้นไม้ให้เจริญเติบโตได้ดี มาดูกันว่าคุณควรเลือกดินแบบไหน...",
-          date: "2024-07-20",
+            "Step-by-step guide to repotting your plants to ensure they stay healthy and grow well.",
+          date: "2024-04-20",
         },
       ],
+      features: [
+        {
+          name: "Monstera Deliciosa",
+          price: "$29.99",
+          img: "https://cdn.pixabay.com/photo/2021/03/19/08/00/monstera-plant-6106850_640.jpg",
+        },
+        {
+          name: "Fiddle Leaf Fig",
+          price: "$39.99",
+          img: "https://th.bing.com/th/id/R.7b5fecbf5568651e8eff22058f6fa49e?rik=vfcAfhCAhPdztQ&pid=ImgRaw&r=0",
+        },
+        {
+          name: "Snake Plant",
+          price: "$19.99",
+          img: "https://th.bing.com/th/id/OIP.VsjL5J_cyPvJM1ZnMPCXGQHaJQ?w=205&h=256&c=7&r=0&o=5&dpr=1.3&pid=1.7",
+        },
+        {
+          name: "Peace Lily",
+          price: "$24.99",
+          img: "https://th.bing.com/th/id/OIP.M0ppDfkNqLMbZ14K62lVIwHaJ4?w=205&h=273&c=7&r=0&o=5&dpr=1.3&pid=1.7",
+        },
+        {
+          name: "Pothos",
+          price: "$14.99",
+          img: "https://cdn.pixabay.com/photo/2024/03/03/03/44/ai-generated-8609739_640.jpg",
+        },
+        {
+          name: "Pilea Peperomioides",
+          price: "$15",
+          img: "https://th.bing.com/th/id/R.36d3fec0c553e6d09dfd38d26aea4089?rik=s7Bl7MNl6qjvsQ&pid=ImgRaw&r=0",
+        },
+        {
+          name: "String of Pearls",
+          price: "$20",
+          img: "https://th.bing.com/th/id/OIP.ukwa5RpYVFgfrceBxkiF_gHaJ3?rs=1&pid=ImgDetMain",
+        },
+        {
+          name: "Ficus Elastica 'Tineke'",
+          price: "$25",
+          img: "https://th.bing.com/th/id/OIP.VOmwF48T4eHxjCY1hGmSHQHaHa?rs=1&pid=ImgDetMain",
+        },
+        {
+          name: "Calathea Orbifolia",
+          price: "$18",
+          img: "https://th.bing.com/th/id/OIP.MbKLSf0vA-xIG-5x8D-MPQHaHr?rs=1&pid=ImgDetMain",
+        },
+        {
+          name: "Hoya Kerrii",
+          price: "$22",
+          img: "https://i.etsystatic.com/14339179/r/il/d7a37b/2816836250/il_600x600.2816836250_43cn.jpg",
+        },
+      ],
+      currentIndex: 0,
+      itemsPerPage: 4,
     };
   },
   methods: {
-    toggleActive() {
-      this.active = !this.active;
+    setButton(index) {
+      this.selectedButton = index;
+    },
+    scrollLeft() {
+      if (this.currentIndex > 0) {
+        this.currentIndex--;
+      }
+    },
+    scrollRight() {
+      if (this.currentIndex < this.maxIndex) {
+        this.currentIndex++;
+      }
+    },
+  },
+  computed: {
+    maxIndex() {
+      return Math.ceil(this.features.length / this.itemsPerPage) - 1;
+    },
+    displayedFeatures() {
+      const start = this.currentIndex * this.itemsPerPage;
+      const end = start + this.itemsPerPage;
+      return this.features.slice(start, end);
     },
   },
 };
