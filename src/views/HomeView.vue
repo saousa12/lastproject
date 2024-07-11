@@ -16,7 +16,7 @@
         ></v-carousel-item>
       </v-carousel>
     </div>
-    <div class="new-product my-14">
+    <div class="new-product" style="margin: 5% 0">
       <div class="text-center text-h3 my-10">
         <div>New Products</div>
         <div class="text-h5">
@@ -30,11 +30,85 @@
           :key="index"
           class="text-center font-weight-bold text-h6"
         >
-          <img :src="product.src" class="resized-image" />
+          <v-hover v-slot:default="{ isHovering, props }">
+            <div class="hover-container" v-bind="props">
+              <v-img :src="product.src" class="resized-image"></v-img>
+              <v-expand-transition>
+                <div
+                  v-if="isHovering"
+                  class="d-flex justify-center hover-buttons"
+                >
+                  <v-btn
+                    icon="mdi-cart-outline"
+                    class="ma-2 hover-btn bg-light-green"
+                  ></v-btn>
+                  <v-btn
+                    icon="mdi-poll"
+                    class="ma-2 hover-btn bg-light-green"
+                  ></v-btn>
+                  <v-btn
+                    icon="mdi-heart-outline"
+                    class="ma-2 hover-btn bg-light-green"
+                  ></v-btn>
+                  <v-btn
+                    icon="mdi-eye-outline"
+                    class="ma-2 hover-btn bg-light-green"
+                  ></v-btn>
+                </div>
+              </v-expand-transition>
+            </div>
+          </v-hover>
           <p>{{ product.name }}</p>
           <p class="text-light-green">{{ product.price }}</p>
         </div>
       </div>
+      <!-- <div>
+        <v-carousel hide-delimiters height="auto" cycle>
+          <v-carousel-item
+            v-for="(chunk, chunkIndex) in chunks"
+            :key="chunkIndex"
+          >
+            <div class="d-flex justify-center flex-row">
+              <div
+                v-for="(product, index) in chunk"
+                :key="index"
+                class="text-center font-weight-bold text-h6 mx-2"
+              >
+                <v-hover v-slot:default="{ isHovering, props }">
+                  <div class="hover-container" v-bind="props">
+                    <v-img :src="product.src" class="resized-image"></v-img>
+                    <v-expand-transition>
+                      <div
+                        v-if="isHovering"
+                        class="d-flex justify-center hover-buttons"
+                      >
+                        <v-btn
+                          icon="mdi-cart-outline"
+                          class="ma-2 hover-btn bg-light-green"
+                        ></v-btn>
+                        <v-btn
+                          icon="mdi-poll"
+                          class="ma-2 hover-btn bg-light-green"
+                        ></v-btn>
+                        <v-btn
+                          icon="mdi-heart-outline"
+                          class="ma-2 hover-btn bg-light-green"
+                        ></v-btn>
+                        <v-btn
+                          icon="mdi-eye-outline"
+                          class="ma-2 hover-btn bg-light-green"
+                        ></v-btn>
+                      </div>
+                    </v-expand-transition>
+                  </div>
+                </v-hover>
+                <p>{{ product.name }}</p>
+                <p class="text-light-green">{{ product.price }}</p>
+              </div>
+            </div>
+          </v-carousel-item>
+        </v-carousel>
+      </div> -->
     </div>
     <div class="sale">
       <v-row class="ma-5 pa-5">
@@ -78,7 +152,7 @@
         </v-col>
       </v-row>
     </div>
-    <div class="sale">
+    <div class="sale" style="margin: 5% 0">
       <v-row class="ma-5 pa-5">
         <v-col
           class="d-flex flex-column justify-center"
@@ -177,23 +251,54 @@
               md="2"
               class="mr-2"
             >
-              <div class="text-center text-h6">
-                <img :src="item.img" alt="" class="resized-image" />
-                <p>⭐⭐⭐⭐⭐</p>
-                <p>{{ item.name }}</p>
-                <p class="text-red">{{ item.price }}</p>
-              </div>
+              <v-hover v-slot="{ isHovering, props }">
+                <div class="text-center text-h6" v-bind="props">
+                  <v-img :src="item.img" alt="" class="resized-image">
+                    <v-expand-transition>
+                      <div
+                        v-if="isHovering"
+                        class="d-flex justify-center hover-buttons"
+                      >
+                        <v-btn
+                          icon="mdi-cart-outline"
+                          class="ma-2 hover-btn bg-light-green"
+                        ></v-btn>
+                        <v-btn
+                          icon="mdi-poll"
+                          class="ma-2 hover-btn bg-light-green"
+                        ></v-btn>
+                        <v-btn
+                          icon="mdi-heart-outline"
+                          class="ma-2 hover-btn bg-light-green"
+                        ></v-btn>
+                        <v-btn
+                          icon="mdi-eye-outline"
+                          class="ma-2 hover-btn bg-light-green"
+                        ></v-btn>
+                      </div>
+                    </v-expand-transition>
+                  </v-img>
+                  <p>⭐⭐⭐⭐⭐</p>
+                  <p>{{ item.name }}</p>
+                  <p class="text-red">{{ item.price }}</p>
+                </div>
+              </v-hover>
             </v-col>
           </v-row>
         </div>
-        <div class="d-flex flex-row justify-center" style="margin-right: 15px">
-          <v-btn rounded="xl" @click="scrollLeft" :disabled="currentIndex === 0"
+        <div class="d-flex flex-row justify-center">
+          <v-btn
+            rounded="xl"
+            @click="scrollLeft"
+            :disabled="currentIndex === 0"
+            class="ma-2"
             >←</v-btn
           >
           <v-btn
             rounded="xl"
             @click="scrollRight"
             :disabled="currentIndex === maxIndex"
+            class="ma-2"
             >→</v-btn
           >
         </div>
@@ -250,9 +355,7 @@ export default {
   name: "Home",
   data() {
     return {
-      isActive: false,
       selectedButton: 0,
-      focus: false,
       buttons: ["Special Product", "Feature", "Bestseller"],
       newProducts: [
         {
@@ -391,13 +494,25 @@ export default {
       const end = start + this.itemsPerPage;
       return this.features.slice(start, end);
     },
+    chunks() {
+      const chunkSize = 4;
+      let index = 0;
+      const arrayLength = this.newProducts.length;
+      const tempArray = [];
+
+      for (index = 0; index < arrayLength; index += chunkSize) {
+        const chunk = this.newProducts.slice(index, index + chunkSize);
+        tempArray.push(chunk);
+      }
+
+      return tempArray;
+    },
   },
 };
 </script>
 
 <style scoped>
 .resized-image {
-  background-color: #f0f0f0;
   border-radius: 5px;
   margin: 5px;
   width: 300px;
@@ -414,9 +529,9 @@ export default {
 }
 .text-overlay {
   position: absolute;
-  top: 50%; /* จุดศูนย์กลางในแนวตั้ง */
-  left: 20px; /* ระยะของ text-overlay จากซ้าย */
-  transform: translateY(-50%); /* ย้าย text-overlay ให้อยู่กลางจากด้านบนลงมา */
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
   text-align: center;
   z-index: 1;
 }
@@ -430,7 +545,17 @@ a:hover {
 a {
   color: black;
 }
-#like:active {
-  color: red;
+.hover-container {
+  position: relative;
+}
+.hover-buttons {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.hover-btn:hover {
+  background-color: white !important;
 }
 </style>

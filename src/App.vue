@@ -1,9 +1,10 @@
 <template>
   <v-app>
     <v-app-bar app color="green" dark>
-      <v-btn to="/"> <span class="mr-2 text-white">Home</span></v-btn>
-      <v-btn to="#shop"><span class="mr-2 text-white">Shop</span></v-btn>
-      <v-btn to="#blog"><span class="mr-2 text-white">Blog</span></v-btn>
+      <!-- <v-btn to="/"> <span class="mr-2 text-white">Home</span></v-btn> -->
+      <v-btn href="#"> <span class="mr-2 text-white">Home</span></v-btn>
+      <v-btn href="#shop"><span class="mr-2 text-white">Shop</span></v-btn>
+      <v-btn href="#blog"><span class="mr-2 text-white">Blog</span></v-btn>
 
       <v-spacer></v-spacer>
       <v-btn icon="mdi-facebook" />
