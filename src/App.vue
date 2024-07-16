@@ -2,6 +2,13 @@
   <v-app>
     <v-app-bar app color="green" dark>
       <!-- <v-btn to="/"> <span class="mr-2 text-white">Home</span></v-btn> -->
+      <div class="border-sm rounded-circle bg-white pa-2 my-5">
+        <v-img
+          src="https://cdn.pixabay.com/photo/2013/07/12/14/11/sapling-147940_640.png"
+          style="height: 30px"
+        />
+        <p class="font-weight-black text-black">Plant shop</p>
+      </div>
       <v-btn href="#"> <span class="mr-2 text-white">Home</span></v-btn>
       <v-btn href="#shop"><span class="mr-2 text-white">Shop</span></v-btn>
       <v-btn href="#blog"><span class="mr-2 text-white">Blog</span></v-btn>
@@ -14,7 +21,7 @@
     <v-main>
       <router-view />
     </v-main>
-    <v-footer class="bg-indigo-lighten-1 text-center d-flex flex-column">
+    <v-footer class="bg-brown-darken-1 text-center d-flex flex-column">
       <div>
         <v-btn
           v-for="icon in icons"
@@ -57,5 +64,8 @@ export default {
 #login-btn {
   border-color: black;
   border-width: 2px;
+}
+.my-5 {
+  margin: 2% 0 2% 0%;
 }
 </style>

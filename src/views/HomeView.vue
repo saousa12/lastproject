@@ -5,7 +5,7 @@
         color="white"
         hide-delimiter-background
         show-arrows="hover"
-        style="color: black"
+        style="color: white"
         height="800"
       >
         <v-carousel-item
